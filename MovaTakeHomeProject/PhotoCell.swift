@@ -28,14 +28,21 @@ final class PhotoCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        photoImageView.image = nil
+        keywordLabel.text = nil
+    }
+    
     // MARK: - SetupUI
     
-    func setup() {}
+    func setup() {
+        photoImageView.loadImage(fromURL: "https://images.unsplash.com/photo-1416339306562-f3d12fefd36f?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&s=92f3e02f63678acc8416d044e189f515")
+        keywordLabel.text = "12345"
+    }
     
     private func setupPhotoImageView() {
         photoImageView.contentMode = .scaleAspectFill
         photoImageView.translatesAutoresizingMaskIntoConstraints = false
-        photoImageView.image = UIImage(named: "1")
         photoImageView.layer.cornerRadius = 16
         photoImageView.layer.masksToBounds = true
         photoImageView.clipsToBounds = true

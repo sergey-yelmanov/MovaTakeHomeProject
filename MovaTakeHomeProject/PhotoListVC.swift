@@ -18,6 +18,15 @@ final class PhotoListVC: UIViewController {
 
         setupUI()
         setupGestures()
+        
+//        PhotoService.shared.getRandomPhoto(withKeyword: "cat") { result in
+//            switch result {
+//            case .success(let photo):
+//                print(photo.keyword)
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
     }
     
     // MARK: - SetupUI
@@ -92,7 +101,11 @@ extension PhotoListVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PhotoCell.self), for: indexPath) as! PhotoCell
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: String(describing: PhotoCell.self),
+            for: indexPath) as! PhotoCell
+        
+        cell.setup()
         
         return cell
     }

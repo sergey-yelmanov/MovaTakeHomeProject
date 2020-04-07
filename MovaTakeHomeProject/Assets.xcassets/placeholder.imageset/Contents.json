@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "photo-1416339306562-f3d12fefd36f.jpeg",
+      "filename" : "Restaurant.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Restaurant@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "Restaurant@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
