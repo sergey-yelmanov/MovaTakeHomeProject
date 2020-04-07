@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  PhotoListVC.swift
 //  MovaTakeHomeProject
 //
 //  Created by Sergey Yelmanov on 07.04.2020.
@@ -8,13 +8,12 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class PhotoListVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
+        
     }
 
-
 }
-
