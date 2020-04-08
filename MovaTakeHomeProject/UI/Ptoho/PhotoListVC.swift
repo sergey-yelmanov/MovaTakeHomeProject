@@ -101,13 +101,18 @@ final class PhotoListVC: UIViewController {
     // MARK: - Networking
     
     private func getRandomPhoto(text: String) {
-        PhotoService.shared.getRandomPhoto(withKeyword: text) { result in
+        Router.shared.showLoading(in: view)
+        
+        PhotoService.shared.getRandomPhoto(withKeyword: text) { [weak self] result in
+            guard let self = self else { return }
+            
+            Router.shared.dismissLoading()
             
             switch result {
             case .success(let photo):
                 RealmService.shared.addNewPhoto(photo)
             case .failure(let error):
-                print(error.localizedDescription)
+                AlertService.showAlert(vc: self, title: error.localizedDescription)
             }
         }
     }

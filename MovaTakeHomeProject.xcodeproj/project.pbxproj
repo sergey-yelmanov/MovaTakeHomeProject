@@ -22,6 +22,8 @@
 		45F63E54243DB71A00B2AFA9 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F63E53243DB71A00B2AFA9 /* Router.swift */; };
 		45F63E5E243DBB8700B2AFA9 /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F63E5D243DBB8700B2AFA9 /* UILabel+Ext.swift */; };
 		45F63E61243DD4BF00B2AFA9 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F63E60243DD4BF00B2AFA9 /* LoadingView.swift */; };
+		45F63E63243DD60200B2AFA9 /* NetworkingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F63E62243DD60200B2AFA9 /* NetworkingError.swift */; };
+		45F63E65243DD7BF00B2AFA9 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F63E64243DD7BF00B2AFA9 /* AlertService.swift */; };
 		E6F6C69CFA9BF6932C11E9CD /* Pods_MovaTakeHomeProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDA60DABACEC1A3E964139B2 /* Pods_MovaTakeHomeProject.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +45,8 @@
 		45F63E53243DB71A00B2AFA9 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		45F63E5D243DBB8700B2AFA9 /* UILabel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Ext.swift"; sourceTree = "<group>"; };
 		45F63E60243DD4BF00B2AFA9 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		45F63E62243DD60200B2AFA9 /* NetworkingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingError.swift; sourceTree = "<group>"; };
+		45F63E64243DD7BF00B2AFA9 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		E0EF48B0E430A419FFFAC629 /* Pods-MovaTakeHomeProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovaTakeHomeProject.release.xcconfig"; path = "Target Support Files/Pods-MovaTakeHomeProject/Pods-MovaTakeHomeProject.release.xcconfig"; sourceTree = "<group>"; };
 		E4FAD9A16B48BC6406C2B5DF /* Pods-MovaTakeHomeProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovaTakeHomeProject.debug.xcconfig"; path = "Target Support Files/Pods-MovaTakeHomeProject/Pods-MovaTakeHomeProject.debug.xcconfig"; sourceTree = "<group>"; };
 		FDA60DABACEC1A3E964139B2 /* Pods_MovaTakeHomeProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovaTakeHomeProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,6 +121,7 @@
 			children = (
 				45F63E5F243DD4A100B2AFA9 /* Components */,
 				45F63E5B243DB8AD00B2AFA9 /* Ptoho */,
+				45F63E64243DD7BF00B2AFA9 /* AlertService.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -134,6 +139,7 @@
 			children = (
 				45F63E4D243CF17000B2AFA9 /* Constants.swift */,
 				45F63E5A243DB85600B2AFA9 /* Extensions */,
+				45F63E62243DD60200B2AFA9 /* NetworkingError.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -308,12 +314,14 @@
 				456F8E17243CDF8E007814FC /* PhotoCell.swift in Sources */,
 				45F63E48243CE7CB00B2AFA9 /* UIImageView+Ext.swift in Sources */,
 				45F63E52243DA6BB00B2AFA9 /* UIView+Ext.swift in Sources */,
+				45F63E65243DD7BF00B2AFA9 /* AlertService.swift in Sources */,
 				456F8E01243CC12B007814FC /* AppDelegate.swift in Sources */,
 				45F63E4A243CEB7700B2AFA9 /* Photo.swift in Sources */,
 				45F63E50243CF25400B2AFA9 /* RealmService.swift in Sources */,
 				456F8E03243CC12B007814FC /* SceneDelegate.swift in Sources */,
 				456F8E15243CD154007814FC /* PhotoListVC.swift in Sources */,
 				45F63E4C243CEC1600B2AFA9 /* PhotoService.swift in Sources */,
+				45F63E63243DD60200B2AFA9 /* NetworkingError.swift in Sources */,
 				45F63E5E243DBB8700B2AFA9 /* UILabel+Ext.swift in Sources */,
 				45F63E61243DD4BF00B2AFA9 /* LoadingView.swift in Sources */,
 				45F63E4E243CF17000B2AFA9 /* Constants.swift in Sources */,

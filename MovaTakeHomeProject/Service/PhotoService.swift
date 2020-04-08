@@ -16,33 +16,42 @@ final class PhotoService {
     
     private init() {}
     
-    func getRandomPhoto(withKeyword keyword: String, completionHandler: @escaping (Result<Photo, Error>) -> Void) {
+    func getRandomPhoto(withKeyword keyword: String, completionHandler: @escaping (Result<Photo, PhotoNetworkingError>) -> Void) {
         let originalString = baseUrlString + "search/photos?query=\(keyword)"
         let urlString = originalString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        let url = URL(string: urlString)!
+        
+        guard let url = URL(string: urlString) else {
+            completionHandler(.failure(.invalidUrl))
+            return
+        }
         
         var urlRequest = URLRequest(url: url)
         urlRequest.setValue("Client-ID " + Constants.apiKey, forHTTPHeaderField: "Authorization")
         
         URLSession.shared.dataTask(with: urlRequest) { (data, _, error) in
-            if let error = error {
-                completionHandler(.failure(error))
+            if error != nil {
+                completionHandler(.failure(.invalidRequest))
                 return
             }
             
-            if let data = data {
-                do {
-                    let result = try JSONDecoder().decode(PhotoResponse.self, from: data)
-                    if let randomPhoto = result.results.randomElement() {
-                        randomPhoto.keyword = keyword
-                        completionHandler(.success(randomPhoto))
-                    }
-                } catch {
-                    completionHandler(.failure(error))
-                }
-                
+            guard let data = data else {
+                completionHandler(.failure(.invalidResponse))
                 return
             }
+            
+            do {
+                let result = try JSONDecoder().decode(PhotoResponse.self, from: data)
+                guard let randomPhoto = result.results.randomElement() else {
+                    completionHandler(.failure(.noData))
+                    return
+                }
+                
+                randomPhoto.keyword = keyword
+                completionHandler(.success(randomPhoto))
+            } catch {
+                completionHandler(.failure(.invalidResponse))
+            }
+            
         }.resume()
     }
     
