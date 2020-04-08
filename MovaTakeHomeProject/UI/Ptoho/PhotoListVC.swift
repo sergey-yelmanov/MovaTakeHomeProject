@@ -171,7 +171,7 @@ final class PhotoListVC: BaseViewController {
             case .success(let photo):
                 RealmService.shared.addNewPhoto(photo)
             case .failure(let error):
-                if error == PhotoNetworkingError.noData {
+                if error == NetworkingError.noData {
                     self.state = .noResult
                 } else {
                     AlertService.showAlert(vc: self, title: error.localizedDescription)
