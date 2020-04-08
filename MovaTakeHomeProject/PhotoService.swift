@@ -16,7 +16,6 @@ final class PhotoService {
     
     private init() {}
     
-    
     func getRandomPhoto(withKeyword keyword: String, completionHandler: @escaping (Result<Photo, Error>) -> Void) {
         let url = URL(string: baseUrlString + "search/photos?query=\(keyword)")!
         

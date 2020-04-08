@@ -35,9 +35,9 @@ final class PhotoCell: UITableViewCell {
     
     // MARK: - SetupUI
     
-    func setup() {
-        photoImageView.loadImage(fromURL: "https://images.unsplash.com/photo-1416339306562-f3d12fefd36f?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&s=92f3e02f63678acc8416d044e189f515")
-        keywordLabel.text = "12345"
+    func setup(photo: Photo) {
+        photoImageView.loadImage(fromURL: photo.urls.regular)
+        keywordLabel.text = photo.keyword
     }
     
     private func setupPhotoImageView() {
@@ -56,9 +56,8 @@ final class PhotoCell: UITableViewCell {
     }
     
     private func setupKeywordLabel() {
-        keywordLabel.text = "texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext"
         keywordLabel.textColor = .white
-        keywordLabel.font = .boldSystemFont(ofSize: 16)
+        keywordLabel.font = .boldSystemFont(ofSize: 18)
         keywordLabel.textAlignment = .left
         keywordLabel.translatesAutoresizingMaskIntoConstraints = false
         

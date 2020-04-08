@@ -17,6 +17,8 @@
 		45F63E4A243CEB7700B2AFA9 /* PhotoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F63E49243CEB7700B2AFA9 /* PhotoResponse.swift */; };
 		45F63E4C243CEC1600B2AFA9 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F63E4B243CEC1600B2AFA9 /* PhotoService.swift */; };
 		45F63E4E243CF17000B2AFA9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F63E4D243CF17000B2AFA9 /* Constants.swift */; };
+		45F63E50243CF25400B2AFA9 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F63E4F243CF25400B2AFA9 /* RealmService.swift */; };
+		45F63E52243DA6BB00B2AFA9 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F63E51243DA6BB00B2AFA9 /* UIView+Ext.swift */; };
 		E6F6C69CFA9BF6932C11E9CD /* Pods_MovaTakeHomeProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDA60DABACEC1A3E964139B2 /* Pods_MovaTakeHomeProject.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +35,8 @@
 		45F63E49243CEB7700B2AFA9 /* PhotoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoResponse.swift; sourceTree = "<group>"; };
 		45F63E4B243CEC1600B2AFA9 /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
 		45F63E4D243CF17000B2AFA9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		45F63E4F243CF25400B2AFA9 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
+		45F63E51243DA6BB00B2AFA9 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		E0EF48B0E430A419FFFAC629 /* Pods-MovaTakeHomeProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovaTakeHomeProject.release.xcconfig"; path = "Target Support Files/Pods-MovaTakeHomeProject/Pods-MovaTakeHomeProject.release.xcconfig"; sourceTree = "<group>"; };
 		E4FAD9A16B48BC6406C2B5DF /* Pods-MovaTakeHomeProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovaTakeHomeProject.debug.xcconfig"; path = "Target Support Files/Pods-MovaTakeHomeProject/Pods-MovaTakeHomeProject.debug.xcconfig"; sourceTree = "<group>"; };
 		FDA60DABACEC1A3E964139B2 /* Pods_MovaTakeHomeProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovaTakeHomeProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,7 +81,9 @@
 				456F8E16243CDF8E007814FC /* PhotoCell.swift */,
 				45F63E49243CEB7700B2AFA9 /* PhotoResponse.swift */,
 				45F63E4B243CEC1600B2AFA9 /* PhotoService.swift */,
+				45F63E4F243CF25400B2AFA9 /* RealmService.swift */,
 				45F63E47243CE7CB00B2AFA9 /* UIImageView+Ext.swift */,
+				45F63E51243DA6BB00B2AFA9 /* UIView+Ext.swift */,
 				45F63E4D243CF17000B2AFA9 /* Constants.swift */,
 				456F8E09243CC12D007814FC /* Assets.xcassets */,
 				456F8E0B243CC12D007814FC /* LaunchScreen.storyboard */,
@@ -219,8 +225,10 @@
 			files = (
 				456F8E17243CDF8E007814FC /* PhotoCell.swift in Sources */,
 				45F63E48243CE7CB00B2AFA9 /* UIImageView+Ext.swift in Sources */,
+				45F63E52243DA6BB00B2AFA9 /* UIView+Ext.swift in Sources */,
 				456F8E01243CC12B007814FC /* AppDelegate.swift in Sources */,
 				45F63E4A243CEB7700B2AFA9 /* PhotoResponse.swift in Sources */,
+				45F63E50243CF25400B2AFA9 /* RealmService.swift in Sources */,
 				456F8E03243CC12B007814FC /* SceneDelegate.swift in Sources */,
 				456F8E15243CD154007814FC /* PhotoListVC.swift in Sources */,
 				45F63E4C243CEC1600B2AFA9 /* PhotoService.swift in Sources */,

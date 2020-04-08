@@ -14,9 +14,7 @@ extension UIImageView {
     func loadImage(fromURL url: String) {
         image = UIImage(named: "placeholder")
         
-        guard let imageURL = URL(string: url) else {
-            return
-        }
+        guard let imageURL = URL(string: url) else { return }
         
         let session = URLSession.shared
         let cache =  URLCache.shared

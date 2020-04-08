@@ -17,8 +17,13 @@ final class PhotoResponse: Codable {
 
 final class Photo: Object, Codable {
     
-    @objc dynamic var keyword: String? = nil
+    @objc dynamic var keyword = ""
     @objc dynamic var urls: PhotoUrls!
+    @objc dynamic var created = Date()
+    
+    private enum CodingKeys: String, CodingKey {
+        case urls
+    }
     
 }
 

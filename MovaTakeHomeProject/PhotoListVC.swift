@@ -7,26 +7,32 @@
 //
 
 import UIKit
+import RealmSwift
 
 final class PhotoListVC: UIViewController {
     
+    // MARK: - UI Elements
+    
     private let tableView = UITableView()
     private let searchController = UISearchController(searchResultsController: nil)
+    
+    // MARK: - Properties
+    
+    private lazy var photos: Results<Photo> = { RealmService.shared.getPhotos() }()
+    private var notificationToken: NotificationToken?
 
+    // MARK: - Life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        subscribeForNotification()
         setupUI()
         setupGestures()
-        
-//        PhotoService.shared.getRandomPhoto(withKeyword: "cat") { result in
-//            switch result {
-//            case .success(let photo):
-//                print(photo.keyword)
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//            }
-//        }
+    }
+    
+    deinit {
+        notificationToken?.invalidate()
     }
     
     // MARK: - SetupUI
@@ -47,19 +53,18 @@ final class PhotoListVC: UIViewController {
         tableView.allowsSelection = false
         tableView.separatorStyle = .none
         tableView.tableFooterView = UIView()
-        tableView.register(PhotoCell.self, forCellReuseIdentifier: String(describing: PhotoCell.self))
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(
+            PhotoCell.self,
+            forCellReuseIdentifier: String(describing: PhotoCell.self)
+        )
         
-        self.view.addSubview(tableView)
+        view.addSubview(tableView)
         
-        tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+        tableView.pin(to: view)
     }
     
     private func setupSearchController() {
-        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.placeholder = "Search photos"
@@ -70,7 +75,10 @@ final class PhotoListVC: UIViewController {
     // MARK: - Gestures
     
     private func setupGestures() {
-        let hideKeyboardTapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        let hideKeyboardTapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(hideKeyboard)
+        )
         view.addGestureRecognizer(hideKeyboardTapGesture)
     }
     
@@ -79,6 +87,28 @@ final class PhotoListVC: UIViewController {
     @objc private func hideKeyboard() {
         searchController.isActive = false
         searchController.searchBar.resignFirstResponder()
+    }
+    
+    // MARK: - Notifications
+    
+    private func subscribeForNotification() {
+        notificationToken = try! Realm().observe { [weak self] (_, _) in
+            guard let self = self else { return }
+            self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .top)
+        }
+    }
+    
+    // MARK: - Networking
+    
+    private func getRandomPhoto(text: String) {
+        PhotoService.shared.getRandomPhoto(withKeyword: text) { result in
+            switch result {
+            case .success(let photo):
+                RealmService.shared.addNewPhoto(photo)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 
 }
@@ -96,8 +126,9 @@ extension PhotoListVC: UITableViewDelegate {
     // MARK: - Table view data source
 
 extension PhotoListVC: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        15
+        photos.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -105,19 +136,21 @@ extension PhotoListVC: UITableViewDataSource {
             withIdentifier: String(describing: PhotoCell.self),
             for: indexPath) as! PhotoCell
         
-        cell.setup()
+        cell.setup(photo: photos[indexPath.row])
         
         return cell
     }
     
 }
 
-    // MARK: - Search results updating
+    // MARK: - Search bar delegate
 
-extension PhotoListVC: UISearchResultsUpdating {
+extension PhotoListVC: UISearchBarDelegate {
     
-    func updateSearchResults(for searchController: UISearchController) {
-        
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let text = searchBar.text else { return }
+        getRandomPhoto(text: text)
+        hideKeyboard()
     }
     
 }
