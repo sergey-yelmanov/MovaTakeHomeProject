@@ -9,16 +9,23 @@
 import UIKit
 import RealmSwift
 
+enum State {
+    case noData
+    case dataDisplayed
+}
+
 final class PhotoListVC: UIViewController {
     
     // MARK: - UI Elements
     
     private let tableView = UITableView()
+    private let noDataView = NoDataView(text: "No photos here yet...")
     private let searchController = UISearchController(searchResultsController: nil)
     
     // MARK: - Properties
     
     private lazy var photos: Results<Photo> = { RealmService.shared.getPhotos() }()
+    private var state = State.dataDisplayed
     private var notificationToken: NotificationToken?
 
     // MARK: - Life cycle
@@ -44,7 +51,9 @@ final class PhotoListVC: UIViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         
         setupTableView()
+        setupNoDataView()
         setupSearchController()
+        applyUI(state: photos.isEmpty ? .noData : .dataDisplayed)
     }
     
     private func setupTableView() {
@@ -63,6 +72,13 @@ final class PhotoListVC: UIViewController {
         tableView.pin(to: view)
     }
     
+    private func setupNoDataView() {
+        noDataView.alpha = 0
+        view.addSubview(noDataView)
+        
+        noDataView.pin(to: view)
+    }
+    
     private func setupSearchController() {
         searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -70,6 +86,20 @@ final class PhotoListVC: UIViewController {
         searchController.searchBar.placeholder = "Search"
         searchController.searchBar.autocapitalizationType = .none
         navigationItem.searchController = searchController
+    }
+    
+    private func applyUI(state: State) {
+        switch state {
+        case .noData:
+            UIView.animate(withDuration: 0.3) {
+                self.noDataView.alpha = 1
+            }
+
+        case .dataDisplayed:
+            noDataView.alpha = 0
+        }
+
+        self.state = state
     }
     
     // MARK: - Gestures
@@ -94,6 +124,7 @@ final class PhotoListVC: UIViewController {
     private func subscribeForNotification() {
         notificationToken = try! Realm().observe { [weak self] (_, _) in
             guard let self = self else { return }
+            self.applyUI(state: self.photos.isEmpty ? .noData : .dataDisplayed)
             self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .top)
         }
     }
@@ -101,12 +132,12 @@ final class PhotoListVC: UIViewController {
     // MARK: - Networking
     
     private func getRandomPhoto(text: String) {
-        Router.shared.showLoading(in: view)
+//        Router.shared.showLoading(in: view)
         
         PhotoService.shared.getRandomPhoto(withKeyword: text) { [weak self] result in
             guard let self = self else { return }
             
-            Router.shared.dismissLoading()
+//            Router.shared.dismissLoading()
             
             switch result {
             case .success(let photo):
