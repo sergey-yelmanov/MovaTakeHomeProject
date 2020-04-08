@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		452C2ADC243E21660063866B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452C2ADB243E21660063866B /* NetworkService.swift */; };
 		456F8E01243CC12B007814FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F8E00243CC12B007814FC /* AppDelegate.swift */; };
 		456F8E03243CC12B007814FC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F8E02243CC12B007814FC /* SceneDelegate.swift */; };
 		456F8E0A243CC12D007814FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 456F8E09243CC12D007814FC /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		452C2ADB243E21660063866B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		456F8DFD243CC12B007814FC /* MovaTakeHomeProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovaTakeHomeProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		456F8E00243CC12B007814FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		456F8E02243CC12B007814FC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 		45F63E56243DB80300B2AFA9 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				452C2ADB243E21660063866B /* NetworkService.swift */,
 				45F63E4B243CEC1600B2AFA9 /* PhotoService.swift */,
 				45F63E4F243CF25400B2AFA9 /* RealmService.swift */,
 			);
@@ -318,6 +321,7 @@
 				45F63E48243CE7CB00B2AFA9 /* UIImageView+Ext.swift in Sources */,
 				45F63E52243DA6BB00B2AFA9 /* UIView+Ext.swift in Sources */,
 				45F63E65243DD7BF00B2AFA9 /* AlertService.swift in Sources */,
+				452C2ADC243E21660063866B /* NetworkService.swift in Sources */,
 				456F8E01243CC12B007814FC /* AppDelegate.swift in Sources */,
 				45F63E4A243CEB7700B2AFA9 /* Photo.swift in Sources */,
 				45F63E50243CF25400B2AFA9 /* RealmService.swift in Sources */,

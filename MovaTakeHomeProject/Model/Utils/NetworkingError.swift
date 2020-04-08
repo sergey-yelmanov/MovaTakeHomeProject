@@ -13,7 +13,6 @@ enum NetworkingError: String, Error {
     case invalidUrl = "Invalid URL"
     case invalidRequest = "Invalid request"
     case invalidResponse = "Invalid response"
-    case noData = "No photo found for the specified word"
     case noInternet = "No internet connection"
     
 }

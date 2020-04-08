@@ -169,13 +169,13 @@ final class PhotoListVC: BaseViewController {
             
             switch result {
             case .success(let photo):
-                RealmService.shared.addNewPhoto(photo)
-            case .failure(let error):
-                if error == NetworkingError.noData {
-                    self.state = .noResult
+                if let photo = photo {
+                    RealmService.shared.addNewPhoto(photo)
                 } else {
-                    AlertService.showAlert(vc: self, title: error.localizedDescription)
+                    self.state = .noResult
                 }
+            case .failure(let error):
+                AlertService.showAlert(vc: self, title: error.localizedDescription)
             }
         }
     }

@@ -7,60 +7,14 @@
 //
 
 import Foundation
-import Network
 
 final class PhotoService {
     
     static let shared = PhotoService()
     
     private let baseUrlString = "https://api.unsplash.com/"
-    private let monitor = NWPathMonitor()
-    private var internetAvailable = true
     
-    private init() {
-        setupNetworkMonitor()
-    }
-    
-    // MARK: - Network monitor configuration
-
-    private func setupNetworkMonitor() {
-        let queue = DispatchQueue(label: "NetworkMonitor")
-        
-        monitor.pathUpdateHandler = { [weak self] path in
-            guard let self = self else { return }
-            self.internetAvailable = path.status == .satisfied
-        }
-
-        monitor.start(queue: queue)
-    }
-    
-    /// Method for fetching and parsing response from API.
-    private func fetchData<T: Decodable>(with request: URLRequest, completionHandler: @escaping (Result<T, NetworkingError>) -> Void) {
-        if !internetAvailable {
-            completionHandler(.failure(.noInternet))
-            return
-        }
-        
-        URLSession.shared.dataTask(with: request) { (data, _, error) in
-            guard error == nil else {
-                completionHandler(.failure(.invalidRequest))
-                return
-            }
-            
-            guard let data = data else {
-                completionHandler(.failure(.invalidResponse))
-                return
-            }
-            
-            do {
-                let result = try JSONDecoder().decode(T.self, from: data)
-                completionHandler(.success(result))
-            } catch {
-                completionHandler(.failure(.invalidResponse))
-            }
-            
-        }.resume()
-    }
+    private init() {}
     
     /// Method for building request from search keyword
     private func getRequest(from keyword: String) -> URLRequest? {
@@ -77,23 +31,18 @@ final class PhotoService {
         return request
     }
     
-    func getRandomPhoto(withKeyword keyword: String, completionHandler: @escaping (Result<Photo, NetworkingError>) -> Void) {
+    func getRandomPhoto(withKeyword keyword: String, completionHandler: @escaping (Result<Photo?, NetworkingError>) -> Void) {
         guard let urlRequest = getRequest(from: keyword) else {
             completionHandler(.failure(.invalidUrl))
             return
         }
         
-        fetchData(with: urlRequest) { (response: Result<PhotoResponse, NetworkingError>) in
+        NetworkService.shared.fetchData(with: urlRequest) { (response: Result<PhotoResponse, NetworkingError>) in
             switch response {
             case .success(let response):
-                guard let randomPhoto = response.results.randomElement() else {
-                    completionHandler(.failure(.noData))
-                    return
-                }
-                
-                randomPhoto.keyword = keyword
+                let randomPhoto = response.results.randomElement()
+                randomPhoto?.keyword = keyword
                 completionHandler(.success(randomPhoto))
-                
             case .failure(let error):
                 completionHandler(.failure(error))
             }
