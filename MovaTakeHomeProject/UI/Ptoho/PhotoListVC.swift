@@ -67,7 +67,7 @@ final class PhotoListVC: UIViewController {
         searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
-        searchController.searchBar.placeholder = "Search photos"
+        searchController.searchBar.placeholder = "Search"
         searchController.searchBar.autocapitalizationType = .none
         navigationItem.searchController = searchController
     }
@@ -102,6 +102,7 @@ final class PhotoListVC: UIViewController {
     
     private func getRandomPhoto(text: String) {
         PhotoService.shared.getRandomPhoto(withKeyword: text) { result in
+            
             switch result {
             case .success(let photo):
                 RealmService.shared.addNewPhoto(photo)

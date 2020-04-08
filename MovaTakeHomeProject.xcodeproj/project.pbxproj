@@ -21,6 +21,7 @@
 		45F63E52243DA6BB00B2AFA9 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F63E51243DA6BB00B2AFA9 /* UIView+Ext.swift */; };
 		45F63E54243DB71A00B2AFA9 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F63E53243DB71A00B2AFA9 /* Router.swift */; };
 		45F63E5E243DBB8700B2AFA9 /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F63E5D243DBB8700B2AFA9 /* UILabel+Ext.swift */; };
+		45F63E61243DD4BF00B2AFA9 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F63E60243DD4BF00B2AFA9 /* LoadingView.swift */; };
 		E6F6C69CFA9BF6932C11E9CD /* Pods_MovaTakeHomeProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDA60DABACEC1A3E964139B2 /* Pods_MovaTakeHomeProject.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		45F63E51243DA6BB00B2AFA9 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		45F63E53243DB71A00B2AFA9 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		45F63E5D243DBB8700B2AFA9 /* UILabel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Ext.swift"; sourceTree = "<group>"; };
+		45F63E60243DD4BF00B2AFA9 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		E0EF48B0E430A419FFFAC629 /* Pods-MovaTakeHomeProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovaTakeHomeProject.release.xcconfig"; path = "Target Support Files/Pods-MovaTakeHomeProject/Pods-MovaTakeHomeProject.release.xcconfig"; sourceTree = "<group>"; };
 		E4FAD9A16B48BC6406C2B5DF /* Pods-MovaTakeHomeProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovaTakeHomeProject.debug.xcconfig"; path = "Target Support Files/Pods-MovaTakeHomeProject/Pods-MovaTakeHomeProject.debug.xcconfig"; sourceTree = "<group>"; };
 		FDA60DABACEC1A3E964139B2 /* Pods_MovaTakeHomeProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovaTakeHomeProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +115,7 @@
 		45F63E57243DB80E00B2AFA9 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				45F63E5F243DD4A100B2AFA9 /* Components */,
 				45F63E5B243DB8AD00B2AFA9 /* Ptoho */,
 			);
 			path = UI;
@@ -160,6 +163,14 @@
 				456F8E16243CDF8E007814FC /* PhotoCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		45F63E5F243DD4A100B2AFA9 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				45F63E60243DD4BF00B2AFA9 /* LoadingView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		64B4F3B5BE6311D4BA042B5C /* Frameworks */ = {
@@ -304,6 +315,7 @@
 				456F8E15243CD154007814FC /* PhotoListVC.swift in Sources */,
 				45F63E4C243CEC1600B2AFA9 /* PhotoService.swift in Sources */,
 				45F63E5E243DBB8700B2AFA9 /* UILabel+Ext.swift in Sources */,
+				45F63E61243DD4BF00B2AFA9 /* LoadingView.swift in Sources */,
 				45F63E4E243CF17000B2AFA9 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

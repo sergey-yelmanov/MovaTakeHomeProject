@@ -12,4 +12,12 @@ enum Constants {
     
     static let apiKey = "7_FVwTp9qm0ElcUxbWs41HwpxgwAAfFKB3VZRGywMKk"
     
+    // MARK: - Accessibility identifiers
+
+    enum AccessibilityIdentifier {
+
+        static let isLoading = "isLoading"
+
+    }
+    
 }
