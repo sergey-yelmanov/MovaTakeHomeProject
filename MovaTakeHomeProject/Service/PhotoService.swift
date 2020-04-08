@@ -17,7 +17,9 @@ final class PhotoService {
     private init() {}
     
     func getRandomPhoto(withKeyword keyword: String, completionHandler: @escaping (Result<Photo, Error>) -> Void) {
-        let url = URL(string: baseUrlString + "search/photos?query=\(keyword)")!
+        let originalString = baseUrlString + "search/photos?query=\(keyword)"
+        let urlString = originalString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        let url = URL(string: urlString)!
         
         var urlRequest = URLRequest(url: url)
         urlRequest.setValue("Client-ID " + Constants.apiKey, forHTTPHeaderField: "Authorization")

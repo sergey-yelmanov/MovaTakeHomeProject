@@ -14,11 +14,13 @@
 		456F8E15243CD154007814FC /* PhotoListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F8E14243CD154007814FC /* PhotoListVC.swift */; };
 		456F8E17243CDF8E007814FC /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F8E16243CDF8E007814FC /* PhotoCell.swift */; };
 		45F63E48243CE7CB00B2AFA9 /* UIImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F63E47243CE7CB00B2AFA9 /* UIImageView+Ext.swift */; };
-		45F63E4A243CEB7700B2AFA9 /* PhotoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F63E49243CEB7700B2AFA9 /* PhotoResponse.swift */; };
+		45F63E4A243CEB7700B2AFA9 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F63E49243CEB7700B2AFA9 /* Photo.swift */; };
 		45F63E4C243CEC1600B2AFA9 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F63E4B243CEC1600B2AFA9 /* PhotoService.swift */; };
 		45F63E4E243CF17000B2AFA9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F63E4D243CF17000B2AFA9 /* Constants.swift */; };
 		45F63E50243CF25400B2AFA9 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F63E4F243CF25400B2AFA9 /* RealmService.swift */; };
 		45F63E52243DA6BB00B2AFA9 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F63E51243DA6BB00B2AFA9 /* UIView+Ext.swift */; };
+		45F63E54243DB71A00B2AFA9 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F63E53243DB71A00B2AFA9 /* Router.swift */; };
+		45F63E5E243DBB8700B2AFA9 /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F63E5D243DBB8700B2AFA9 /* UILabel+Ext.swift */; };
 		E6F6C69CFA9BF6932C11E9CD /* Pods_MovaTakeHomeProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDA60DABACEC1A3E964139B2 /* Pods_MovaTakeHomeProject.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,11 +34,13 @@
 		456F8E14243CD154007814FC /* PhotoListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListVC.swift; sourceTree = "<group>"; };
 		456F8E16243CDF8E007814FC /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		45F63E47243CE7CB00B2AFA9 /* UIImageView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
-		45F63E49243CEB7700B2AFA9 /* PhotoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoResponse.swift; sourceTree = "<group>"; };
+		45F63E49243CEB7700B2AFA9 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		45F63E4B243CEC1600B2AFA9 /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
 		45F63E4D243CF17000B2AFA9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		45F63E4F243CF25400B2AFA9 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		45F63E51243DA6BB00B2AFA9 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
+		45F63E53243DB71A00B2AFA9 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		45F63E5D243DBB8700B2AFA9 /* UILabel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Ext.swift"; sourceTree = "<group>"; };
 		E0EF48B0E430A419FFFAC629 /* Pods-MovaTakeHomeProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovaTakeHomeProject.release.xcconfig"; path = "Target Support Files/Pods-MovaTakeHomeProject/Pods-MovaTakeHomeProject.release.xcconfig"; sourceTree = "<group>"; };
 		E4FAD9A16B48BC6406C2B5DF /* Pods-MovaTakeHomeProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovaTakeHomeProject.debug.xcconfig"; path = "Target Support Files/Pods-MovaTakeHomeProject/Pods-MovaTakeHomeProject.debug.xcconfig"; sourceTree = "<group>"; };
 		FDA60DABACEC1A3E964139B2 /* Pods_MovaTakeHomeProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovaTakeHomeProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,21 +79,87 @@
 		456F8DFF243CC12B007814FC /* MovaTakeHomeProject */ = {
 			isa = PBXGroup;
 			children = (
+				45F63E55243DB7F900B2AFA9 /* Model */,
+				45F63E56243DB80300B2AFA9 /* Service */,
+				45F63E57243DB80E00B2AFA9 /* UI */,
+				45F63E53243DB71A00B2AFA9 /* Router.swift */,
 				456F8E00243CC12B007814FC /* AppDelegate.swift */,
 				456F8E02243CC12B007814FC /* SceneDelegate.swift */,
-				456F8E14243CD154007814FC /* PhotoListVC.swift */,
-				456F8E16243CDF8E007814FC /* PhotoCell.swift */,
-				45F63E49243CEB7700B2AFA9 /* PhotoResponse.swift */,
-				45F63E4B243CEC1600B2AFA9 /* PhotoService.swift */,
-				45F63E4F243CF25400B2AFA9 /* RealmService.swift */,
-				45F63E47243CE7CB00B2AFA9 /* UIImageView+Ext.swift */,
-				45F63E51243DA6BB00B2AFA9 /* UIView+Ext.swift */,
-				45F63E4D243CF17000B2AFA9 /* Constants.swift */,
 				456F8E09243CC12D007814FC /* Assets.xcassets */,
 				456F8E0B243CC12D007814FC /* LaunchScreen.storyboard */,
 				456F8E0E243CC12D007814FC /* Info.plist */,
 			);
 			path = MovaTakeHomeProject;
+			sourceTree = "<group>";
+		};
+		45F63E55243DB7F900B2AFA9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				45F63E58243DB82B00B2AFA9 /* Models */,
+				45F63E59243DB83100B2AFA9 /* Utils */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		45F63E56243DB80300B2AFA9 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				45F63E4B243CEC1600B2AFA9 /* PhotoService.swift */,
+				45F63E4F243CF25400B2AFA9 /* RealmService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		45F63E57243DB80E00B2AFA9 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				45F63E5B243DB8AD00B2AFA9 /* Ptoho */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		45F63E58243DB82B00B2AFA9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				45F63E49243CEB7700B2AFA9 /* Photo.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		45F63E59243DB83100B2AFA9 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				45F63E4D243CF17000B2AFA9 /* Constants.swift */,
+				45F63E5A243DB85600B2AFA9 /* Extensions */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		45F63E5A243DB85600B2AFA9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				45F63E47243CE7CB00B2AFA9 /* UIImageView+Ext.swift */,
+				45F63E51243DA6BB00B2AFA9 /* UIView+Ext.swift */,
+				45F63E5D243DBB8700B2AFA9 /* UILabel+Ext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		45F63E5B243DB8AD00B2AFA9 /* Ptoho */ = {
+			isa = PBXGroup;
+			children = (
+				456F8E14243CD154007814FC /* PhotoListVC.swift */,
+				45F63E5C243DB8B700B2AFA9 /* Cells */,
+			);
+			path = Ptoho;
+			sourceTree = "<group>";
+		};
+		45F63E5C243DB8B700B2AFA9 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				456F8E16243CDF8E007814FC /* PhotoCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		64B4F3B5BE6311D4BA042B5C /* Frameworks */ = {
@@ -223,15 +293,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45F63E54243DB71A00B2AFA9 /* Router.swift in Sources */,
 				456F8E17243CDF8E007814FC /* PhotoCell.swift in Sources */,
 				45F63E48243CE7CB00B2AFA9 /* UIImageView+Ext.swift in Sources */,
 				45F63E52243DA6BB00B2AFA9 /* UIView+Ext.swift in Sources */,
 				456F8E01243CC12B007814FC /* AppDelegate.swift in Sources */,
-				45F63E4A243CEB7700B2AFA9 /* PhotoResponse.swift in Sources */,
+				45F63E4A243CEB7700B2AFA9 /* Photo.swift in Sources */,
 				45F63E50243CF25400B2AFA9 /* RealmService.swift in Sources */,
 				456F8E03243CC12B007814FC /* SceneDelegate.swift in Sources */,
 				456F8E15243CD154007814FC /* PhotoListVC.swift in Sources */,
 				45F63E4C243CEC1600B2AFA9 /* PhotoService.swift in Sources */,
+				45F63E5E243DBB8700B2AFA9 /* UILabel+Ext.swift in Sources */,
 				45F63E4E243CF17000B2AFA9 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

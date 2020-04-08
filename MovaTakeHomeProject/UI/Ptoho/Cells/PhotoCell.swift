@@ -60,6 +60,7 @@ final class PhotoCell: UITableViewCell {
         keywordLabel.font = .boldSystemFont(ofSize: 18)
         keywordLabel.textAlignment = .left
         keywordLabel.translatesAutoresizingMaskIntoConstraints = false
+        keywordLabel.addShadow()
         
         photoImageView.addSubview(keywordLabel)
         
@@ -69,3 +70,4 @@ final class PhotoCell: UITableViewCell {
     }
     
 }
+

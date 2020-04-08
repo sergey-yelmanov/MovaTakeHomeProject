@@ -1,5 +1,5 @@
 //
-//  PhotoResponse.swift
+//  Photo.swift
 //  MovaTakeHomeProject
 //
 //  Created by Sergey Yelmanov on 07.04.2020.
