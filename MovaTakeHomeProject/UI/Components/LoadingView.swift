@@ -22,10 +22,13 @@ final class LoadingView: UIView {
         
         dimmedView.translatesAutoresizingMaskIntoConstraints = false
         
-        dimmedView.heightAnchor.constraint(equalToConstant: 75).isActive = true
-        dimmedView.widthAnchor.constraint(equalToConstant: 75).isActive = true
-        dimmedView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        dimmedView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            dimmedView.heightAnchor.constraint(equalToConstant: 75),
+            dimmedView.widthAnchor.constraint(equalToConstant: 75),
+            dimmedView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            dimmedView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+        
         
         let activityIndicator = UIActivityIndicatorView(style: .large)
         activityIndicator.color = .white
@@ -33,8 +36,11 @@ final class LoadingView: UIView {
         
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         
-        activityIndicator.centerXAnchor.constraint(equalTo: dimmedView.centerXAnchor).isActive = true
-        activityIndicator.centerYAnchor.constraint(equalTo: dimmedView.centerYAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: dimmedView.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: dimmedView.centerYAnchor)
+        ])
+        
         activityIndicator.startAnimating()
         
         UIView.animate(withDuration: 0.1) {

@@ -20,8 +20,9 @@ final class PhotoCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        setupPhotoImageView()
         setupKeywordLabel()
+        setupPhotoImageView()
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -40,33 +41,35 @@ final class PhotoCell: UITableViewCell {
         keywordLabel.text = photo.keyword
     }
     
+    private func setupKeywordLabel() {
+        keywordLabel.textColor = .black
+        keywordLabel.font = .boldSystemFont(ofSize: 18)
+        keywordLabel.textAlignment = .left
+        keywordLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        addSubview(keywordLabel)
+    }
+    
     private func setupPhotoImageView() {
         photoImageView.contentMode = .scaleAspectFill
         photoImageView.translatesAutoresizingMaskIntoConstraints = false
-        photoImageView.layer.cornerRadius = 16
+        photoImageView.layer.cornerRadius = 8
         photoImageView.layer.masksToBounds = true
         photoImageView.clipsToBounds = true
         
         addSubview(photoImageView)
-        
-        photoImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16).isActive = true
-        photoImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
-        photoImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
-        photoImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
     }
     
-    private func setupKeywordLabel() {
-        keywordLabel.textColor = .white
-        keywordLabel.font = .boldSystemFont(ofSize: 18)
-        keywordLabel.textAlignment = .left
-        keywordLabel.translatesAutoresizingMaskIntoConstraints = false
-        keywordLabel.addShadow()
-        
-        photoImageView.addSubview(keywordLabel)
-        
-        keywordLabel.bottomAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: -16).isActive = true
-        keywordLabel.trailingAnchor.constraint(equalTo: photoImageView.trailingAnchor, constant: -16).isActive = true
-        keywordLabel.leadingAnchor.constraint(equalTo: photoImageView.leadingAnchor, constant: 16).isActive = true
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            keywordLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            keywordLabel.bottomAnchor.constraint(equalTo: photoImageView.topAnchor, constant: -8),
+            keywordLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            keywordLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            photoImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
+            photoImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            photoImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16)
+        ])
     }
     
 }

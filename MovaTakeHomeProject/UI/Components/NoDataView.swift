@@ -10,49 +10,58 @@ import UIKit
 
 final class NoDataView: UIView {
 
-    private let containerView = UIView()
+    private let imageView = UIImageView()
     private let textLabel = UILabel()
     
-    init(text: String) {
+    init() {
         super.init(frame: UIScreen.main.bounds)
         
         backgroundColor = .white
-        
-        setupContainerView()
-        setupTextLabel(with: text)
+        setupTextLabel()
+        setupImageView()
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupContainerView() {
-        containerView.backgroundColor = .lightGray
-        containerView.layer.cornerRadius = 16
-        
-        addSubview(containerView)
-        
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        
-        containerView.heightAnchor.constraint(equalToConstant: 32).isActive = true
-        containerView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        containerView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    func setup(text: String, image: UIImage?) {
+        textLabel.text = text
+        imageView.image = image
     }
     
-    private func setupTextLabel(with text: String) {
-        textLabel.text = text
-        textLabel.textColor = .white
+    private func setupTextLabel() {
+        textLabel.textColor = .black
         textLabel.textAlignment = .center
         textLabel.font = .boldSystemFont(ofSize: 16)
         
-        containerView.addSubview(textLabel)
+        addSubview(textLabel)
         
         textLabel.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private func setupImageView() {
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = UIColor(white: 0.9, alpha: 1)
         
-        textLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 4).isActive = true
-        textLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -4).isActive = true
-        textLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16).isActive = true
-        textLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16).isActive = true
+        addSubview(imageView)
+        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            imageView.heightAnchor.constraint(equalToConstant: 100),
+            imageView.widthAnchor.constraint(equalToConstant: 100),
+            imageView.bottomAnchor.constraint(equalTo: textLabel.topAnchor, constant: 0),
+            imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            textLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -Constants.ScreenInsets.topSafeAreaInset),
+            textLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            textLabel.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 16),
+            textLabel.trailingAnchor.constraint(greaterThanOrEqualTo: trailingAnchor, constant: -16)
+        ])
     }
     
 }

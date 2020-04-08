@@ -6,7 +6,7 @@
 //  Copyright © 2020 Sergey Yelmanov. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 enum Constants {
     
@@ -17,6 +17,20 @@ enum Constants {
     enum AccessibilityIdentifier {
 
         static let isLoading = "isLoading"
+
+    }
+    
+    // MARK: - Screen insets
+    
+    enum ScreenInsets {
+
+        static var topSafeAreaInset: CGFloat {
+            (UIApplication.shared.delegate?.window??.safeAreaInsets.top ?? 20) + 44
+        }
+
+        static var bottomSafeAreaInset: CGFloat {
+            UIApplication.shared.delegate?.window??.safeAreaInsets.bottom ?? 0
+        }
 
     }
     

@@ -12,20 +12,36 @@ import RealmSwift
 enum State {
     case noData
     case dataDisplayed
+    case noResult
 }
 
-final class PhotoListVC: UIViewController {
+final class PhotoListVC: BaseViewController {
     
     // MARK: - UI Elements
     
     private let tableView = UITableView()
-    private let noDataView = NoDataView(text: "No photos here yet...")
+    private let noDataView = NoDataView()
     private let searchController = UISearchController(searchResultsController: nil)
     
     // MARK: - Properties
     
     private lazy var photos: Results<Photo> = { RealmService.shared.getPhotos() }()
-    private var state = State.dataDisplayed
+    private var state = State.dataDisplayed {
+        didSet {
+            DispatchQueue.main.async {
+                switch self.state {
+                case .noData:
+                    self.updateNoDataView(withText: "No photos here yet...", image: nil)
+                    self.updateComponents(true)
+                case .noResult:
+                    self.updateNoDataView(withText: "No results found", image: UIImage(named: "no_results"))
+                    self.updateComponents(true)
+                case .dataDisplayed:
+                    self.updateComponents(false)
+                }
+            }
+        }
+    }
     private var notificationToken: NotificationToken?
 
     // MARK: - Life cycle
@@ -53,7 +69,7 @@ final class PhotoListVC: UIViewController {
         setupTableView()
         setupNoDataView()
         setupSearchController()
-        applyUI(state: photos.isEmpty ? .noData : .dataDisplayed)
+        state = photos.isEmpty ? .noData : .dataDisplayed
     }
     
     private func setupTableView() {
@@ -88,18 +104,25 @@ final class PhotoListVC: UIViewController {
         navigationItem.searchController = searchController
     }
     
-    private func applyUI(state: State) {
-        switch state {
-        case .noData:
-            UIView.animate(withDuration: 0.3) {
-                self.noDataView.alpha = 1
-            }
-
-        case .dataDisplayed:
-            noDataView.alpha = 0
+    private func updateNoDataView(withText text: String, image: UIImage?) {
+        noDataView.setup(text: text, image: image)
+    }
+    
+    private func updateComponents(_ isHidden: Bool) {
+        UIView.animate(withDuration: 0.3) {
+            self.tableView.alpha = isHidden ? 0 : 1
+            self.noDataView.alpha = isHidden ? 1 : 0
         }
-
-        self.state = state
+    }
+    
+    // MARK: - Keyboard handling
+    
+    override func applyKeyboardAppearedWith(keyboardHeight: CGFloat) {
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
+    }
+    
+    override func applyKeyboardDisappeared() {
+        tableView.contentInset = .zero
     }
     
     // MARK: - Gestures
@@ -124,7 +147,7 @@ final class PhotoListVC: UIViewController {
     private func subscribeForNotification() {
         notificationToken = try! Realm().observe { [weak self] (_, _) in
             guard let self = self else { return }
-            self.applyUI(state: self.photos.isEmpty ? .noData : .dataDisplayed)
+            self.state = self.photos.isEmpty ? .noData : .dataDisplayed
             self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .top)
         }
     }
@@ -143,7 +166,11 @@ final class PhotoListVC: UIViewController {
             case .success(let photo):
                 RealmService.shared.addNewPhoto(photo)
             case .failure(let error):
-                AlertService.showAlert(vc: self, title: error.localizedDescription)
+                if error == PhotoNetworkingError.noData {
+                    self.state = .noResult
+                } else {
+                    AlertService.showAlert(vc: self, title: error.localizedDescription)
+                }
             }
         }
     }

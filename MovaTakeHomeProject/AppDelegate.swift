@@ -15,6 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().barTintColor = .white
+        UINavigationBar.appearance().isTranslucent = false
+        
         return true
     }
 
