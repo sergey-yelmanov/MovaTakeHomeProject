@@ -10,7 +10,12 @@ import UIKit
 
 struct AlertService {
 
-    static func showAlert(vc: UIViewController, title: String?, message: String? = nil, completionHandler:(()->())? = nil) {
+    static func showAlert(
+        vc: UIViewController,
+        title: String?,
+        message: String? = nil,
+        completionHandler:(()->())? = nil
+    ) {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             

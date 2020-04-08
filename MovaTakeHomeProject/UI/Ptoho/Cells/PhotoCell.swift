@@ -29,12 +29,14 @@ final class PhotoCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Life cycle
+    
     override func prepareForReuse() {
         photoImageView.image = nil
         keywordLabel.text = nil
     }
     
-    // MARK: - SetupUI
+    // MARK: - Setup
     
     func setup(photo: Photo) {
         photoImageView.loadImage(fromURL: photo.urls.regular)

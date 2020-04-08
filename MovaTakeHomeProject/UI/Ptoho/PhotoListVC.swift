@@ -9,12 +9,6 @@
 import UIKit
 import RealmSwift
 
-enum State {
-    case noData
-    case dataDisplayed
-    case noResult
-}
-
 final class PhotoListVC: BaseViewController {
     
     // MARK: - UI Elements
@@ -25,21 +19,16 @@ final class PhotoListVC: BaseViewController {
     
     // MARK: - Properties
     
+    private enum State {
+        case noData
+        case dataDisplayed
+        case noResult
+    }
+    
     private lazy var photos: Results<Photo> = { RealmService.shared.getPhotos() }()
     private var state = State.dataDisplayed {
         didSet {
-            DispatchQueue.main.async {
-                switch self.state {
-                case .noData:
-                    self.updateNoDataView(withText: "No photos here yet...", image: nil)
-                    self.updateComponents(true)
-                case .noResult:
-                    self.updateNoDataView(withText: "No results found", image: UIImage(named: "no_results"))
-                    self.updateComponents(true)
-                case .dataDisplayed:
-                    self.updateComponents(false)
-                }
-            }
+            updateUI()
         }
     }
     private var notificationToken: NotificationToken?
@@ -84,14 +73,12 @@ final class PhotoListVC: BaseViewController {
         )
         
         view.addSubview(tableView)
-        
         tableView.pin(to: view)
     }
     
     private func setupNoDataView() {
         noDataView.alpha = 0
         view.addSubview(noDataView)
-        
         noDataView.pin(to: view)
     }
     
@@ -100,8 +87,26 @@ final class PhotoListVC: BaseViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.placeholder = "Search"
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = "Cancel"
         searchController.searchBar.autocapitalizationType = .none
         navigationItem.searchController = searchController
+    }
+    
+    // MARK: - UpdateUI
+    
+    private func updateUI() {
+        DispatchQueue.main.async {
+            switch self.state {
+            case .noData:
+                self.updateNoDataView(withText: "No photos here yet...", image: nil)
+                self.updateComponents(true)
+            case .noResult:
+                self.updateNoDataView(withText: "No results found", image: UIImage(named: "no_results"))
+                self.updateComponents(true)
+            case .dataDisplayed:
+                self.updateComponents(false)
+            }
+        }
     }
     
     private func updateNoDataView(withText text: String, image: UIImage?) {

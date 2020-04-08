@@ -10,8 +10,11 @@ import UIKit
 
 final class NoDataView: UIView {
 
+    // MARK: - UI Elements
     private let imageView = UIImageView()
     private let textLabel = UILabel()
+    
+    // MARK: - Initializers
     
     init() {
         super.init(frame: UIScreen.main.bounds)
@@ -25,6 +28,8 @@ final class NoDataView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Setup
     
     func setup(text: String, image: UIImage?) {
         textLabel.text = text
