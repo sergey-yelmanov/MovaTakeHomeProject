@@ -16,20 +16,10 @@ final class PhotoService {
     
     private init() {}
     
-    func getRandomPhoto(withKeyword keyword: String, completionHandler: @escaping (Result<Photo, PhotoNetworkingError>) -> Void) {
-        let originalString = baseUrlString + "search/photos?query=\(keyword)"
-        let urlString = originalString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        
-        guard let url = URL(string: urlString) else {
-            completionHandler(.failure(.invalidUrl))
-            return
-        }
-        
-        var urlRequest = URLRequest(url: url)
-        urlRequest.setValue("Client-ID " + Constants.apiKey, forHTTPHeaderField: "Authorization")
-        
-        URLSession.shared.dataTask(with: urlRequest) { (data, _, error) in
-            if error != nil {
+    /// Method for fetching and parsing response from API.
+    private func fetchData<T: Decodable>(with request: URLRequest, completionHandler: @escaping (Result<T, PhotoNetworkingError>) -> Void) {
+        URLSession.shared.dataTask(with: request) { (data, _, error) in
+            guard error == nil else {
                 completionHandler(.failure(.invalidRequest))
                 return
             }
@@ -40,19 +30,51 @@ final class PhotoService {
             }
             
             do {
-                let result = try JSONDecoder().decode(PhotoResponse.self, from: data)
-                guard let randomPhoto = result.results.randomElement() else {
+                let result = try JSONDecoder().decode(T.self, from: data)
+                completionHandler(.success(result))
+            } catch {
+                completionHandler(.failure(.invalidResponse))
+            }
+            
+        }.resume()
+    }
+    
+    /// Method for building request from search keyword
+    private func getRequest(from keyword: String) -> URLRequest? {
+        let originalString = baseUrlString + "search/photos?query=\(keyword)"
+        let urlString = originalString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        
+        guard let url = URL(string: urlString) else {
+            return nil
+        }
+        
+        var request = URLRequest(url: url)
+        request.setValue("Client-ID " + Constants.apiKey, forHTTPHeaderField: "Authorization")
+        
+        return request
+    }
+    
+    func getRandomPhoto(withKeyword keyword: String, completionHandler: @escaping (Result<Photo, PhotoNetworkingError>) -> Void) {
+        guard let urlRequest = getRequest(from: keyword) else {
+            completionHandler(.failure(.invalidUrl))
+            return
+        }
+        
+        fetchData(with: urlRequest) { (response: Result<PhotoResponse, PhotoNetworkingError>) in
+            switch response {
+            case .success(let response):
+                guard let randomPhoto = response.results.randomElement() else {
                     completionHandler(.failure(.noData))
                     return
                 }
                 
                 randomPhoto.keyword = keyword
                 completionHandler(.success(randomPhoto))
-            } catch {
-                completionHandler(.failure(.invalidResponse))
+                
+            case .failure(let error):
+                completionHandler(.failure(error))
             }
-            
-        }.resume()
+        }
     }
     
 }
