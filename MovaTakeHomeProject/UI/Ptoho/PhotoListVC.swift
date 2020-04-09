@@ -67,6 +67,7 @@ final class PhotoListVC: BaseViewController {
         tableView.allowsSelection = false
         tableView.separatorStyle = .none
         tableView.tableFooterView = UIView()
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 8, right: 0)
         tableView.register(
             PhotoCell.self,
             forCellReuseIdentifier: String(describing: PhotoCell.self)
@@ -123,11 +124,11 @@ final class PhotoListVC: BaseViewController {
     // MARK: - Keyboard handling
     
     override func applyKeyboardAppearedWith(keyboardHeight: CGFloat) {
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight + 8, right: 0)
     }
     
     override func applyKeyboardDisappeared() {
-        tableView.contentInset = .zero
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 8, right: 0)
     }
     
     // MARK: - Gestures
