@@ -62,7 +62,7 @@ final class LoadingView: UIView {
             dimmedView.heightAnchor.constraint(equalToConstant: 75),
             dimmedView.widthAnchor.constraint(equalToConstant: 75),
             dimmedView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            dimmedView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -Constants.ScreenInset.topSafeAreaInset),
+            dimmedView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -Constants.ScreenInset.topSafeAreaInset * 2),
             activityIndicator.centerXAnchor.constraint(equalTo: dimmedView.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: dimmedView.centerYAnchor)
         ])
