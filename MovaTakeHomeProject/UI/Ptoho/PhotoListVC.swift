@@ -167,12 +167,12 @@ final class PhotoListVC: BaseViewController {
     // MARK: - Networking
     
     private func getRandomPhoto(text: String) {
-//        Router.shared.showLoading(in: view)
+        Router.shared.showLoading(in: view)
         
         photoService.getRandomPhoto(withKeyword: text) { [weak self] result in
             guard let self = self else { return }
             
-//            Router.shared.dismissLoading()
+            Router.shared.dismissLoading()
             
             switch result {
             case .success(let photo):

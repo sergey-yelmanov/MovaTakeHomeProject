@@ -43,7 +43,9 @@ final class Router {
 
         let loadingView = LoadingView(view: targetView)
 
-        targetView.addSubview(loadingView)
+        DispatchQueue.main.async {
+            targetView.addSubview(loadingView)
+        }
     }
     
     func dismissLoading() {
@@ -51,11 +53,7 @@ final class Router {
         
         DispatchQueue.main.async {
             for subview in targetView.subviews where subview.accessibilityIdentifier == Constants.AccessibilityIdentifier.isLoading {
-                UIView.animate(withDuration: 0.1, animations: {
-                    subview.alpha = 0
-                }) { _ in
-                    subview.removeFromSuperview()
-                }
+                subview.removeFromSuperview()
             }
         }
     }

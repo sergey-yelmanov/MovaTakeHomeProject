@@ -9,6 +9,11 @@
 import UIKit
 
 final class LoadingView: UIView {
+    
+    // MARK: - UI Elements
+    
+    private let dimmedView = UIView()
+    private let activityIndicator = UIActivityIndicatorView(style: .large)
 
     // MARK: - Initializers
     
@@ -18,57 +23,45 @@ final class LoadingView: UIView {
         accessibilityIdentifier = Constants.AccessibilityIdentifier.isLoading
         backgroundColor = .clear
         
-        let dimmedView = setupDimmedView()
-        
-        view.addSubview(dimmedView)
-        
-        dimmedView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            dimmedView.heightAnchor.constraint(equalToConstant: 75),
-            dimmedView.widthAnchor.constraint(equalToConstant: 75),
-            dimmedView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            dimmedView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
-        
-        
-        let activityIndicator = UIActivityIndicatorView(style: .large)
-        activityIndicator.color = .white
-        dimmedView.addSubview(activityIndicator)
-        
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            activityIndicator.centerXAnchor.constraint(equalTo: dimmedView.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: dimmedView.centerYAnchor)
-        ])
+        setupDimmedView()
+        setupActivityIndicator()
+        setupConstraints()
         
         activityIndicator.startAnimating()
-        
-        UIView.animate(withDuration: 0.1) {
-            dimmedView.alpha = 1.0
-        }
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - Setup 
-    private func setupDimmedView() -> UIView {
-        let dimmedView = UIView()
-        dimmedView.backgroundColor = UIColor(
-            red: 0,
-            green: 0,
-            blue: 0,
-            alpha: 0.3
-        )
-        dimmedView.alpha = 0
+    // MARK: - Setup
+    
+    private func setupDimmedView() {
+        dimmedView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
         dimmedView.layer.cornerRadius = 8
         
-
-        return dimmedView
+        addSubview(dimmedView)
+        
+        dimmedView.translatesAutoresizingMaskIntoConstraints = false
     }
-
+    
+    private func setupActivityIndicator() {
+        activityIndicator.color = .white
+        dimmedView.addSubview(activityIndicator)
+        
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            dimmedView.heightAnchor.constraint(equalToConstant: 75),
+            dimmedView.widthAnchor.constraint(equalToConstant: 75),
+            dimmedView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            dimmedView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -Constants.ScreenInset.topSafeAreaInset),
+            activityIndicator.centerXAnchor.constraint(equalTo: dimmedView.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: dimmedView.centerYAnchor)
+        ])
+    }
+    
 }
 
