@@ -10,9 +10,11 @@ import UIKit
 
 final class Router {
 
-    // MARK: - Properties
+    // MARK: - Singleton
     
     static var shared: Router!
+    
+    // MARK: - Properties
     
     private var window: UIWindow!
     private var targetView: UIView?
@@ -24,15 +26,19 @@ final class Router {
         Router.shared = self
     }
 
+    // MARK: - Start up logic
+    
     func showStartUpScreen() {
         window.rootViewController = UINavigationController(rootViewController: PhotoListVC())
         window.makeKeyAndVisible()
     }
     
-    func showLoading(in view: UIView? = nil) {
+    // MARK: - Loading helpers
+    
+    func showLoading(in view: UIView) {
         dismissLoading()
 
-        targetView = view ?? window.rootViewController?.view
+        targetView = view
         guard let targetView = targetView else { return }
 
         let loadingView = LoadingView(view: targetView)

@@ -57,7 +57,12 @@ final class LoadingView: UIView {
     // MARK: - Setup 
     private func setupDimmedView() -> UIView {
         let dimmedView = UIView()
-        dimmedView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
+        dimmedView.backgroundColor = UIColor(
+            red: 0,
+            green: 0,
+            blue: 0,
+            alpha: 0.3
+        )
         dimmedView.alpha = 0
         dimmedView.layer.cornerRadius = 8
         

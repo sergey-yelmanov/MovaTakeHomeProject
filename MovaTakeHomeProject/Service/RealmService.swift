@@ -11,9 +11,7 @@ import RealmSwift
 
 final class RealmService {
     
-    static let shared = RealmService()
-    
-    private init() {}
+    init() {}
     
     func getPhotos() -> Results<Photo> {
         try! Realm().objects(Photo.self).sorted(byKeyPath: "created", ascending: false)

@@ -33,7 +33,6 @@ final class PhotoCell: UITableViewCell {
     
     override func prepareForReuse() {
         photoImageView.image = nil
-        keywordLabel.text = nil
     }
     
     // MARK: - Setup
@@ -44,7 +43,7 @@ final class PhotoCell: UITableViewCell {
     }
     
     private func setupKeywordLabel() {
-        keywordLabel.textColor = .black
+        keywordLabel.textColor = Constants.Color.textColor
         keywordLabel.font = .boldSystemFont(ofSize: 18)
         keywordLabel.textAlignment = .left
         keywordLabel.translatesAutoresizingMaskIntoConstraints = false

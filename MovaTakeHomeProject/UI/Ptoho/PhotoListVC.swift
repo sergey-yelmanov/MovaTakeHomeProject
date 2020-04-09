@@ -11,6 +11,11 @@ import RealmSwift
 
 final class PhotoListVC: BaseViewController {
     
+    // MARK: - Services
+    
+    private let photoService = PhotoService()
+    private let realmService = RealmService()
+    
     // MARK: - UI Elements
     
     private let tableView = UITableView()
@@ -25,7 +30,7 @@ final class PhotoListVC: BaseViewController {
         case noResult
     }
     
-    private lazy var photos: Results<Photo> = { RealmService.shared.getPhotos() }()
+    private lazy var photos: Results<Photo> = { realmService.getPhotos() }()
     private var state = State.dataDisplayed {
         didSet {
             updateUI()
@@ -78,6 +83,7 @@ final class PhotoListVC: BaseViewController {
     }
     
     private func setupNoDataView() {
+        noDataView.delegate = self
         noDataView.alpha = 0
         view.addSubview(noDataView)
         noDataView.pin(to: view)
@@ -163,7 +169,7 @@ final class PhotoListVC: BaseViewController {
     private func getRandomPhoto(text: String) {
 //        Router.shared.showLoading(in: view)
         
-        PhotoService.shared.getRandomPhoto(withKeyword: text) { [weak self] result in
+        photoService.getRandomPhoto(withKeyword: text) { [weak self] result in
             guard let self = self else { return }
             
 //            Router.shared.dismissLoading()
@@ -171,7 +177,7 @@ final class PhotoListVC: BaseViewController {
             switch result {
             case .success(let photo):
                 if let photo = photo {
-                    RealmService.shared.addNewPhoto(photo)
+                    self.realmService.addNewPhoto(photo)
                 } else {
                     self.state = .noResult
                 }
@@ -221,6 +227,16 @@ extension PhotoListVC: UISearchBarDelegate {
         guard let text = searchBar.text else { return }
         getRandomPhoto(text: text)
         hideKeyboard()
+    }
+    
+}
+
+    // MARK: - No data view delegate
+
+extension PhotoListVC: NoDataViewDelegate {
+    
+    func actionButtonTapped() {
+        state = photos.isEmpty ? .noData : .dataDisplayed
     }
     
 }

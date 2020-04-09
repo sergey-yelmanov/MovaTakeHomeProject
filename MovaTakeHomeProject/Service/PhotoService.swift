@@ -10,11 +10,9 @@ import Foundation
 
 final class PhotoService {
     
-    static let shared = PhotoService()
-    
     private let baseUrlString = "https://api.unsplash.com/"
     
-    private init() {}
+    init() {}
     
     /// Method for building request from search keyword
     private func getRequest(from keyword: String) -> URLRequest? {

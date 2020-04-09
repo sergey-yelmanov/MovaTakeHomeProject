@@ -11,17 +11,23 @@ import Network
 
 final class NetworkService {
     
+    // MARK: - Singleton
+    
     static let shared = NetworkService()
+    
+    // MARK: - Properties
     
     private let monitor = NWPathMonitor()
     private var internetAvailable = true
     
+    // MARK: - Initializers
+    
     private init() {
         setupNetworkMonitor()
     }
-    
-    // MARK: - Network monitor configuration
 
+    // MARK: - Setup network monitor
+    
     private func setupNetworkMonitor() {
         let queue = DispatchQueue(label: "NetworkMonitor")
         
@@ -32,6 +38,8 @@ final class NetworkService {
 
         monitor.start(queue: queue)
     }
+    
+    // MARK: - Networking
     
     /// Method for fetching and parsing response from API.
     func fetchData<T: Decodable>(with request: URLRequest, completionHandler: @escaping (Result<T, NetworkingError>) -> Void) {
