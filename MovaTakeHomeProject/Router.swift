@@ -41,7 +41,7 @@ final class Router {
         targetView = view
         guard let targetView = targetView else { return }
 
-        let loadingView = LoadingView(view: targetView)
+        let loadingView = LoadingView()
 
         DispatchQueue.main.async {
             targetView.addSubview(loadingView)

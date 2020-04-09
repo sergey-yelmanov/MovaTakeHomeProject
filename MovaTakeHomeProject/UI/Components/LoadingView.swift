@@ -17,8 +17,8 @@ final class LoadingView: UIView {
 
     // MARK: - Initializers
     
-    init(view: UIView) {
-        super.init(frame: view.frame)
+    init() {
+        super.init(frame: UIScreen.main.bounds)
         
         accessibilityIdentifier = Constants.AccessibilityIdentifier.isLoading
         backgroundColor = .clear
@@ -62,7 +62,7 @@ final class LoadingView: UIView {
             dimmedView.heightAnchor.constraint(equalToConstant: 75),
             dimmedView.widthAnchor.constraint(equalToConstant: 75),
             dimmedView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            dimmedView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -Constants.ScreenInset.topSafeAreaInset * 2),
+            dimmedView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -Constants.ScreenInset.topSafeAreaInset),
             activityIndicator.centerXAnchor.constraint(equalTo: dimmedView.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: dimmedView.centerYAnchor)
         ])
