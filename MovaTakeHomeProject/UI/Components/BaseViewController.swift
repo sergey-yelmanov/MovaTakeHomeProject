@@ -19,16 +19,7 @@ class BaseViewController: UIViewController {
     }
 
     deinit {
-        NotificationCenter.default.removeObserver(
-            self,
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
-        NotificationCenter.default.removeObserver(
-            self,
-            name: UIResponder.keyboardWillHideNotification,
-            object: nil
-        )
+        unsubscribeFromNotifications()
     }
     
     // MARK: - Notifications
@@ -47,6 +38,19 @@ class BaseViewController: UIViewController {
             object: nil
         )
     }
+    
+    private func unsubscribeFromNotifications() {
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+    }
 
     // MARK: - Keyboard handling
     
@@ -54,16 +58,16 @@ class BaseViewController: UIViewController {
     func applyKeyboardDisappeared() {}
     
     @objc private func keyboardNotification(_ notification: NSNotification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let duration:TimeInterval = (notification.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let duration = (notification.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
             let animationCurveRawNSN = notification.userInfo![UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
             let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIView.AnimationOptions.curveEaseInOut.rawValue
-            let animationCurve:UIView.AnimationOptions = UIView.AnimationOptions(rawValue: animationCurveRaw)
+            let animationCurve = UIView.AnimationOptions(rawValue: animationCurveRaw)
             let keyboardHeight = keyboardFrame.cgRectValue.height
             
             UIView.animate(
                 withDuration: duration,
-                delay: TimeInterval(0),
+                delay: 0,
                 options: animationCurve,
                 animations: {
                     self.applyKeyboardAppearedWith(keyboardHeight: keyboardHeight)
@@ -75,14 +79,14 @@ class BaseViewController: UIViewController {
     }
     
     @objc private func keyboardHideNotification(_ notification: NSNotification) {
-        let duration:TimeInterval = (notification.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+        let duration = (notification.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
         let animationCurveRawNSN = notification.userInfo![UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
         let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIView.AnimationOptions.curveEaseInOut.rawValue
-        let animationCurve:UIView.AnimationOptions = UIView.AnimationOptions(rawValue: animationCurveRaw)
+        let animationCurve = UIView.AnimationOptions(rawValue: animationCurveRaw)
         
         UIView.animate(
             withDuration: duration,
-            delay: TimeInterval(0),
+            delay: 0,
             options: animationCurve,
             animations: {
                 self.applyKeyboardDisappeared()

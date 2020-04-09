@@ -43,7 +43,7 @@ final class PhotoListVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        subscribeForNotification()
+        subscribeForNotifications()
         setupUI()
         setupGestures()
     }
@@ -156,7 +156,7 @@ final class PhotoListVC: BaseViewController {
     
     // MARK: - Notifications
     
-    private func subscribeForNotification() {
+    private func subscribeForNotifications() {
         notificationToken = try! Realm().observe { [weak self] (_, _) in
             guard let self = self else { return }
             self.state = self.photos.isEmpty ? .noData : .dataDisplayed
