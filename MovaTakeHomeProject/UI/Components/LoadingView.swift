@@ -28,6 +28,10 @@ final class LoadingView: UIView {
         setupConstraints()
         
         activityIndicator.startAnimating()
+        
+        UIView.animate(withDuration: 0.1) {
+            self.dimmedView.alpha = 1
+        }
     }
 
     required init?(coder: NSCoder) {
@@ -39,6 +43,7 @@ final class LoadingView: UIView {
     private func setupDimmedView() {
         dimmedView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
         dimmedView.layer.cornerRadius = 8
+        dimmedView.alpha = 0
         
         addSubview(dimmedView)
         
